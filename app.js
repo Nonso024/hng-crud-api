@@ -1,33 +1,35 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const Person = require("./models/personModel");
 
 const app = express();
 app.use(bodyParser.json());
 
-// Define the person schema
-const personSchema = new mongoose.Schema({
-  name: String,
-});
-
-// Person model
-const Person = mongoose.model("Person", personSchema);
-
 // CREATE
 app.post("/api", async (req, res) => {
-  const { name } = req.body;
+  const { id, name } = req.body;
 
   try {
-    const person = new Person({ name });
+    const person = new Person({ id, name });
     await person.save();
     res.status(201).json(person);
   } catch (error) {
     res.status(400).json({ error: `Failed to create person.` });
   }
 });
+// READ (Retrieve all Persons)
+app.get("/api", async (req, res) => {
+  try {
+    const persons = await Person.find();
+    res.json(persons);
+  } catch (error) {
+    res.status(500).json({ error: `Server error` });
+  }
+});
 
-// READ
-app.get("/api/user_id", async (req, res) => {
+// READ (Retreive specific Person by ID)
+app.get("/api/:user_id", async (req, res) => {
   const userId = req.params.user_id;
 
   try {
@@ -43,14 +45,14 @@ app.get("/api/user_id", async (req, res) => {
 });
 
 // UPDATE
-app.put("/api/user_id", async (req, res) => {
+app.put("/api/:user_id", async (req, res) => {
   const userId = req.params.user_id;
-  const { name } = req.body;
+  const { id, name } = req.body;
 
   try {
     const person = await Person.findByIdAndUpdate(
       userId,
-      { name },
+      { id, name },
       { new: true }
     );
     if (person) {
@@ -64,7 +66,7 @@ app.put("/api/user_id", async (req, res) => {
 });
 
 // DELETE
-app.delete("/api/user_id", async (req, res) => {
+app.delete("/api/:user_id", async (req, res) => {
   const userId = req.params.user_id;
 
   try {
