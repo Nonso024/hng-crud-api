@@ -126,6 +126,4 @@ DELETE /api/:name
 
 ## UML Diagram
 
-<!-- ![UML Diagram](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true) -->
-
 ![UML Diagram designed by Ani Joseph](/assets/UML-person-api.png)
