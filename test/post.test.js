@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
 const request = require("supertest");
-const app = require("./app.js");
+const app = require("../app.js");
 
 describe("/POST /api", () => {
   it("should fail when no data is sent", async () => {

@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
 const request = require("supertest");
-const app = require("./app.js");
+const app = require("../app.js");
 
 describe("GET /api", () => {
   it("should return a list of persons", (done) => {

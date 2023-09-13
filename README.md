@@ -119,3 +119,13 @@ To delete a person, make a DELETE request to the following endpoint, replacing `
 ```bash
 DELETE /api/:name
 ```
+
+## Source Code
+
+[Github Repo](https://github.com/Nonso024/hng-crud-api)
+
+## UML Diagram
+
+<!-- ![UML Diagram](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true) -->
+
+![UML Diagram designed by Ani Joseph](/assets/UML-person-api.png)
