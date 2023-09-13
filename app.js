@@ -8,10 +8,10 @@ app.use(bodyParser.json());
 
 // CREATE
 app.post("/api", async (req, res) => {
-  const { id, name } = req.body;
+  const { name } = req.body;
 
   try {
-    const person = new Person({ id, name });
+    const person = new Person({ name });
     await person.save();
     res.status(201).json(person);
   } catch (error) {
@@ -28,12 +28,12 @@ app.get("/api", async (req, res) => {
   }
 });
 
-// READ (Retreive specific Person by ID)
-app.get("/api/:user_id", async (req, res) => {
-  const userId = req.params.user_id;
+// READ (Retreive specific Person by name)
+app.get("/api/:name", async (req, res) => {
+  const { name } = req.params;
 
   try {
-    const person = await Person.findById(userId);
+    const person = await Person.findOne({ name });
     if (person) {
       res.json(person);
     } else {
@@ -47,12 +47,12 @@ app.get("/api/:user_id", async (req, res) => {
 // UPDATE
 app.put("/api/:user_id", async (req, res) => {
   const userId = req.params.user_id;
-  const { id, name } = req.body;
+  const { name } = req.body;
 
   try {
     const person = await Person.findByIdAndUpdate(
       userId,
-      { id, name },
+      { name },
       { new: true }
     );
     if (person) {
@@ -66,11 +66,11 @@ app.put("/api/:user_id", async (req, res) => {
 });
 
 // DELETE
-app.delete("/api/:user_id", async (req, res) => {
-  const userId = req.params.user_id;
+app.delete("/api/:name", async (req, res) => {
+  const { name } = req.params;
 
   try {
-    const removedPerson = await Person.findByIdAndDelete(userId);
+    const removedPerson = await Person.findOneAndDelete({ name });
     if (removedPerson) {
       res.json({ message: `Person deleted succesfully` });
     } else {

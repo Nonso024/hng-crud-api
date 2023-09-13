@@ -4,13 +4,17 @@
   "description": "A CRUD REST API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
   },
   "author": "Ani Joseph",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "chai": "^4.3.8",
     "express": "^4.18.2",
-    "mongoose": "^7.5.1"
+    "mocha": "^10.2.0",
+    "mongoose": "^7.5.1",
+    "supertest": "^6.3.3"
   }
 }
